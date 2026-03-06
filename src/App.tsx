@@ -28,11 +28,26 @@ export function App() {
   useEffect(() => {
     let cancelled = false;
 
+    async function waitForHealth() {
+      let lastError: unknown;
+
+      for (let attempt = 0; attempt < 10; attempt += 1) {
+        try {
+          return await backendApi.health();
+        } catch (error) {
+          lastError = error;
+          await new Promise((resolve) => window.setTimeout(resolve, 500));
+        }
+      }
+
+      throw lastError ?? new Error("Backend health check failed");
+    }
+
     async function bootstrap() {
       try {
         setSidecarStatus("starting");
         await invoke("start_sidecar");
-        const payload = await backendApi.health();
+        const payload = await waitForHealth();
 
         if (!cancelled) {
           setHealth(payload);
@@ -51,6 +66,7 @@ export function App() {
 
     return () => {
       cancelled = true;
+      void invoke("stop_sidecar").catch(() => undefined);
     };
   }, [setHealth, setSidecarStatus]);
 

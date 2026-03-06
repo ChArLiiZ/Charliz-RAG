@@ -13,7 +13,10 @@ Last updated: 2026-03-06
 - [x] Added Python FastAPI sidecar with `GET /health`.
 - [x] Added collection and document API scaffolding with in-memory backend store.
 - [x] Connected `Documents` page to backend collection/document stub endpoints.
-- [ ] Wire verified Tauri sidecar process lifecycle end-to-end.
+- [x] Fixed frontend and Rust build blockers for local Tauri development.
+- [x] Added first-pass Tauri sidecar lifecycle hardening with startup delay, health retry, and shutdown cleanup.
+- [x] Added first working document ingestion slice for `.txt` and `.md` files.
+- [x] Switched document parsing to `unstructured` with multipart file upload.
 - [ ] Add persistent settings storage and secure API key handling.
 - [ ] Replace in-memory document stub with real ingestion pipeline.
 
@@ -25,8 +28,18 @@ Last updated: 2026-03-06
 - Backend now exposes early `collections` and `documents` scaffolding for Phase 2.
 - Verified `GET /health` locally on `http://127.0.0.1:8741/health`.
 - Verified `GET /collections` and `GET /documents` locally against the FastAPI stub backend.
-- Found current gap: sidecar process lifecycle still needs proper readiness, shutdown, and stale-process handling.
-- Next focus: implement real document ingestion persistence path and harden sidecar lifecycle.
+- Verified `pnpm build` succeeds for the frontend.
+- Verified `cargo check` succeeds for `src-tauri`.
+- Added placeholder Tauri Windows icon so local build/dev can proceed.
+- Added frontend health retry and Tauri-side shutdown cleanup for the Python backend.
+- Added FastAPI CORS configuration for local Vite/Tauri origins so frontend health checks can succeed.
+- Added a minimal text chunker and in-memory ingestion flow that marks uploaded text documents as `ready`.
+- Documents page now supports direct `.txt` / `.md` upload from the UI and shows chunk counts.
+- Backend now accepts multipart file upload and parses documents with `unstructured.partition.auto.partition`.
+- Verified parser smoke test for Markdown and verified `POST /documents/ingest` returns `ready` with chunk metadata.
+- Fixed PDF ingestion by routing PDFs through `partition_pdf(strategy="fast")` and adding the required `unstructured-inference` dependency.
+- Remaining gap: sidecar lifecycle still needs stronger stale-process/port-conflict recovery.
+- Next focus: replace the in-memory document flow with persistent storage while keeping `unstructured` as the parser layer.
 
 ### Notes
 

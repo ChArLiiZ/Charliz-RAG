@@ -1,7 +1,7 @@
 from datetime import datetime, UTC
-from pathlib import Path
 from uuid import uuid4
 
+from core.chunker import chunk_text
 from models.collection import Collection, CreateCollectionRequest
 from models.document import Document, IngestDocumentRequest
 
@@ -39,19 +39,19 @@ class MemoryStore:
         return collection
 
     def list_documents(self) -> list[Document]:
-        return list(self.documents.values())
+        return sorted(self.documents.values(), key=lambda document: document.created_at, reverse=True)
 
     def create_document(self, payload: IngestDocumentRequest) -> Document:
         now = datetime.now(UTC)
-        file_path = Path(payload.file_path)
+        chunks = chunk_text(payload.content)
         document = Document(
             id=f"doc_{uuid4().hex[:8]}",
             collection_id=payload.collection_id,
-            file_name=file_path.name or payload.file_path,
-            file_path=str(file_path),
-            size_bytes=file_path.stat().st_size if file_path.exists() else 0,
-            status="queued",
-            chunk_count=None,
+            file_name=payload.file_name,
+            file_path=payload.file_name,
+            size_bytes=len(payload.content.encode("utf-8")),
+            status="ready",
+            chunk_count=len(chunks),
             error_message=None,
             created_at=now,
             updated_at=now,

@@ -95,12 +95,44 @@ button {
   margin-top: 20px;
 }
 
+.upload-panel {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid rgba(159, 176, 192, 0.16);
+  border-radius: 16px;
+  background: rgba(27, 40, 54, 0.55);
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field span {
+  font-size: 13px;
+  color: #9fb0c0;
+}
+
+.input-like {
+  width: 100%;
+  border: 1px solid rgba(159, 176, 192, 0.16);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: inherit;
+  background: rgba(15, 23, 34, 0.85);
+}
+
 .stack ul {
   padding-left: 20px;
 }
 
 .error-text {
   color: #f07c8a;
+}
+
+.success-text {
+  color: #4dba87;
 }
 
 .health-panel {

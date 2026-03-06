@@ -1,2 +1,5 @@
 fastapi>=0.115.0
 uvicorn>=0.34.0
+python-multipart>=0.0.20
+unstructured[csv,docx,md,pdf,xlsx]>=0.18.15
+unstructured-inference>=1.2.0
