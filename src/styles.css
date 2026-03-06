@@ -1,0 +1,145 @@
+:root {
+  color-scheme: light dark;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: #0f1722;
+  color: #eaf1f7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(72, 194, 216, 0.18), transparent 24%),
+    linear-gradient(180deg, #0f1722, #16202c 55%, #0f1722);
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  padding: 32px 20px;
+  border-right: 1px solid rgba(159, 176, 192, 0.18);
+  background: rgba(22, 32, 44, 0.82);
+  backdrop-filter: blur(18px);
+}
+
+.nav-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.nav-item {
+  border: 1px solid rgba(159, 176, 192, 0.16);
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align: left;
+  color: inherit;
+  background: rgba(27, 40, 54, 0.8);
+}
+
+.nav-item.active {
+  border-color: rgba(72, 194, 216, 0.58);
+  background: rgba(72, 194, 216, 0.16);
+}
+
+.content {
+  padding: 32px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #9fb0c0;
+}
+
+.page-header h1,
+.sidebar h2,
+.panel h2 {
+  margin: 0;
+}
+
+.panel {
+  border: 1px solid rgba(159, 176, 192, 0.16);
+  border-radius: 20px;
+  padding: 24px;
+  background: rgba(22, 32, 44, 0.82);
+  backdrop-filter: blur(14px);
+}
+
+.stack {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.stack ul {
+  padding-left: 20px;
+}
+
+.error-text {
+  color: #f07c8a;
+}
+
+.health-panel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(159, 176, 192, 0.16);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(22, 32, 44, 0.82);
+}
+
+.health-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #d69a2d;
+}
+
+.health-panel.is-ready .health-dot {
+  background: #4dba87;
+}
+
+.health-panel.is-error .health-dot {
+  background: #f07c8a;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    border-right: 0;
+    border-bottom: 1px solid rgba(159, 176, 192, 0.18);
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

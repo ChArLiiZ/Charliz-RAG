@@ -1,0 +1,72 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
+*.temp
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Node / frontend
+node_modules/
+dist/
+.vite/
+coverage/
+*.tsbuildinfo
+
+# Tauri / Rust
+src-tauri/target/
+src-tauri/gen/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.python-version
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Python build artifacts
+build/
+site/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# PyInstaller
+*.spec
+
+# Local app/runtime data
+.cache/
+tmp/
+temp/
+data/
+models/
+lancedb/
+*.db
+*.sqlite
+*.sqlite3
+
+# Tauri local state
+src-tauri/.cargo/

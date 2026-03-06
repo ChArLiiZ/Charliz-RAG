@@ -1,0 +1,19 @@
+[package]
+name = "charliz-rag"
+version = "0.1.0"
+description = "Charliz RAG desktop shell"
+authors = ["Codex"]
+edition = "2021"
+
+[lib]
+name = "charliz_rag_lib"
+crate-type = ["cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.0.1", features = [] }
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri = { version = "2.3.1", features = [] }
+tauri-plugin-store = "2.2.0"
